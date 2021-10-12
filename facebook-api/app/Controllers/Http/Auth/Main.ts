@@ -1,7 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import {StoreValidator} from 'App/Validators/Auth'
 
-export default class MainsController {
+export default class MainController {
   
   public async store ({request, auth}: HttpContextContract) {
     const { email, password } = await request.validate(StoreValidator)
