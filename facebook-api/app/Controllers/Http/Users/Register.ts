@@ -29,7 +29,7 @@ export default class UserRegistersController {
         message.to(email)
         message.from('contato@facebook.com', 'Facebook Clone')
         message.subject('Criação de conta - Facebook Clone')
-        message.htmlView('emails/register', {link})
+        message.htmlView('emails/verify-email', {link})
       })
       
     })
@@ -39,10 +39,13 @@ export default class UserRegistersController {
   }
 
   public async show ({ params }: HttpContextContract) {
-    const userKey = await UserKey.findByOrFail('key', params.key)
-    const user = await userKey.related('user').query().firstOrFail()
 
-    return user
+    const userKey = await UserKey.findByOrFail('key', params.key)
+    
+    await userKey.load('user')
+
+    return userKey.user
+
   }
 
   public async update ({ request, response }: HttpContextContract) {
