@@ -12,3 +12,5 @@ Route.put('/users', 'Users/Main.update').middleware('auth')
 
 Route.put('/users/avatar', 'Users/Avatar.update').middleware('auth')
 Route.delete('/users/avatar', 'Users/Avatar.destroy').middleware('auth')
+
+Route.get('/upload/:file', 'Uploads/Main.show')
