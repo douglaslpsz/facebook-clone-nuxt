@@ -1,5 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { StoreValidator, UpdateValidator } from 'App/Validators/Post'
+import { StoreValidator, UpdateValidator } from 'App/Validators/Post/Main'
 import { User, Post } from 'App/Models'
 import Application from '@ioc:Adonis/Core/Application'
 import fs from 'fs'
@@ -12,6 +12,7 @@ export default class PostsController {
     const user = ( await User.findBy('username', username)) || auth.user!
 
     await user.load('posts',(query) => {
+      query.preload('media')
       query.orderBy('id', 'desc')
       query.preload('user', (query) => {
         query.select('id', 'name', 'username')
