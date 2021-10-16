@@ -16,3 +16,12 @@ Route.delete('/users/avatar', 'Users/Avatar.destroy').middleware('auth')
 Route.get('/upload/:file', 'Uploads/Main.show')
 
 Route.get('/users/search', 'Users/Search.index')//.middleware('auth')
+
+Route.resource('/posts', 'Posts/Main')
+  .apiOnly()
+  .except(['show'])
+  .middleware({
+    store: ['auth'],
+    update: ['auth'],
+    destroy: ['auth'],
+  })
