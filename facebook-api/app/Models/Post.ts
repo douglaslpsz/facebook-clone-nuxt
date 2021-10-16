@@ -15,14 +15,14 @@ export default class Post extends BaseModel {
   @column()
   public description: string
 
-  @column()
-  public serId: string
+  @column( {serializeAs: null} )
+  public userId: string
 
   @belongsTo( () => User)
   public user: BelongsTo<typeof User>
 
   @hasOne( () => File, {
-    foreignKey: 'awnerId',
+    foreignKey: 'ownerId',
     onQuery: (query) => query.where('fileCategory', 'post')
   })
   public media: HasOne<typeof File>
