@@ -35,7 +35,7 @@ export default {
     }
   },
 
-  modules: ['@nuxtjs/axios'],
+  modules: ['@nuxtjs/axios', 'cookie-universal-nuxt'],
 
   axios: {
     baseUrl: 'http://localhost:3333'
