@@ -6,6 +6,10 @@ interface CreatePayload {
   password: string
 }
 
+interface UpdatePayload {
+  token?: string
+}
+
 type Token = string | null
 
 @Module({ name: 'auth', stateFactory: true, namespaced: true })
@@ -31,6 +35,13 @@ export default class Auth extends VuexModule {
     })
 
     this.context.commit('UPDATE_TOKEN', token)
+  }
+
+  @Action
+  public update(payload: UpdatePayload) {
+    const token = payload?.token ? payload.token : $cookies.get('token')
+
+    this.context.commit('UPDATE_TOKEN', token || null)
   }
 
   @Action
