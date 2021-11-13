@@ -14,7 +14,7 @@ export default {
 
   css: ['normalize.css/normalize.css', '@/assets/scss/base.scss'],
 
-  plugins: ['@/plugins/accessor'],
+  plugins: ['@/plugins/accessor', '@/plugins/axios'],
 
   components: [{ path: '@/components/', pathPrefix: false }],
 

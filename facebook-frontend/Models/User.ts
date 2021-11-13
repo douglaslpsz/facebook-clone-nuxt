@@ -3,7 +3,9 @@ export interface User {
   name: String
   username: String
   email: String
-  rememberMeToken: String
   createdAt: String
   updatedAt: String
+  avatar?: {
+    url: string
+  }
 }
