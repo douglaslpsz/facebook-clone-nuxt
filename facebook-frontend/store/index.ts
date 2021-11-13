@@ -13,5 +13,6 @@ export const actions: ActionTree<RootState, RootState> = {
   async nuxtServerInit({ dispatch }) {
     dispatch('auth/update')
     await dispatch('users/show')
+    // const promise = await dispatch('users/show')
   }
 }
