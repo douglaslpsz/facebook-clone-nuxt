@@ -1,6 +1,17 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel,
+  BelongsTo,
+  belongsTo,
+  column,
+  hasOne,
+  HasOne,
+  hasMany,
+  HasMany,
+  computed,
+} from '@ioc:Adonis/Lucid/Orm'
 import { File, User } from '.'
+import Comment from 'App/Models/Comment'
 
 export default class Post extends BaseModel {
   @column({ isPrimary: true })
@@ -15,15 +26,23 @@ export default class Post extends BaseModel {
   @column()
   public description: string
 
-  @column( {serializeAs: null} )
+  @column({ serializeAs: null })
   public userId: string
 
-  @belongsTo( () => User)
+  @belongsTo(() => User)
   public user: BelongsTo<typeof User>
 
-  @hasOne( () => File, {
+  @hasOne(() => File, {
     foreignKey: 'ownerId',
-    onQuery: (query) => query.where('fileCategory', 'post')
+    onQuery: (query) => query.where('fileCategory', 'post'),
   })
   public media: HasOne<typeof File>
+
+  @hasMany(() => Comment)
+  public comments: HasMany<typeof Comment>
+
+  @computed()
+  public get commentsCount() {
+    return this.$extras.comments_count
+  }
 }
