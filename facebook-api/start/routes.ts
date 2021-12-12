@@ -27,4 +27,14 @@ Route.resource('/posts', 'Posts/Main')
     destroy: ['auth'],
   })
 
+  Route.resource('/comments', 'Comments/Main')
+  .apiOnly()
+  .except(['show'])
+  .middleware({
+    index: ['auth'],
+    store: ['auth'],
+    update: ['auth'],
+    destroy: ['auth'],
+  })
+
 Route.post('/posts/:id/media', 'Posts/Media.store').middleware('auth')
