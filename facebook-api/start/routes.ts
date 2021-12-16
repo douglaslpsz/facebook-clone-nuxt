@@ -37,4 +37,7 @@ Route.resource('/posts', 'Posts/Main')
     destroy: ['auth'],
   })
 
+  Route.put('/reactions', 'Reactions/Main.update').middleware('auth')
+  Route.put('/reactions/:id', 'Reactions/Main.destroy').middleware('auth')
+
 Route.post('/posts/:id/media', 'Posts/Media.store').middleware('auth')
