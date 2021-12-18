@@ -47,4 +47,20 @@ export default class Post extends BaseModel {
 
   @hasMany(() => Reaction, {serializeAs: null})
   public reactions: HasMany<typeof Reaction>
+
+  @computed()
+  public get reactionsCount() {
+    return {
+      like: this.$extras.likeCount || 0,
+      love: this.$extras.loveCount || 0,
+      haha: this.$extras.hahaCount || 0,
+      sad: this.$extras.sadCount || 0,
+      angry: this.$extras.angryCount || 0,
+    }
+  }
+
+  @computed()
+  public get activeReaction() {
+    return this.reactions && this.reactions.length ? this.reactions[0].type : null
+  }
 }
