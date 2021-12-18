@@ -40,4 +40,7 @@ Route.resource('/posts', 'Posts/Main')
   Route.put('/reactions', 'Reactions/Main.update').middleware('auth')
   Route.put('/reactions/:id', 'Reactions/Main.destroy').middleware('auth')
 
+  Route.post('/follow', 'Follows/Follow.store').middleware('auth')
+  Route.post('/unfollow', 'Follows/Unfollow.store').middleware('auth')
+
 Route.post('/posts/:id/media', 'Posts/Media.store').middleware('auth')
