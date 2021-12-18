@@ -43,4 +43,6 @@ Route.resource('/posts', 'Posts/Main')
   Route.post('/follow', 'Follows/Follow.store').middleware('auth')
   Route.post('/unfollow', 'Follows/Unfollow.store').middleware('auth')
 
+  Route.get('/profiles', 'Profiles/Main.show').middleware('auth')
+
 Route.post('/posts/:id/media', 'Posts/Media.store').middleware('auth')
